@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 function Card({movie}) {
   return (
     <div className="card" >
@@ -10,4 +12,12 @@ function Card({movie}) {
   )
 }
 
+Card.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string,
+    Year: PropTypes.string,
+    Poster: PropTypes.string,
+    Type: PropTypes.string,
+  }).isRequired
+}
 export default Card
