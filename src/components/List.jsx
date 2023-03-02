@@ -7,6 +7,7 @@ function List() {
 
     const [movieSearch, setMovieSearch] = useState('batman')
     const [dataMovies, setDataMovies] = useState([])
+    const [error, setError] = useState('')
 
 
     async function getMovies() {
@@ -22,8 +23,14 @@ function List() {
         e.preventDefault();
         const res = await fetch(`${API}&s=${movieSearch}`)
         const data = await res.json();
-        setDataMovies(data.Search)
-        console.log(dataMovies)
+        console.log(data)
+        if(data.Search) {
+            setDataMovies(data.Search)
+            setError('')
+            setMovieSearch('')
+        }else{
+            setError('No se encontro tu busqueda')
+        }
     }
 
     return (
@@ -36,13 +43,15 @@ function List() {
                             className="form-control"
                             placeholder="Search"
                             onChange={e => setMovieSearch(e.target.value)}
+                            value={movieSearch}
                             autoFocus
                         />
                     </form>
+                    <p>{error}</p>
                 </div>
             </div>
             <div className="movies-container">
-                {dataMovies.map(movie=><Card movie={movie}/>)}
+                {dataMovies.map((movie, index)=><Card movie={movie} key={index}/>) }
             </div>
 
         </>
