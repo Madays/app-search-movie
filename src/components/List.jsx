@@ -3,7 +3,8 @@ import Card from "./Card"
 import '../css/list.css'
 
 function List() {
-    const API = 'http://www.omdbapi.com/?i=tt3896198&apikey=aa6cf6c7'
+    const API = import.meta.env.VITE_API
+
 
     const [movieSearch, setMovieSearch] = useState('batman')
     const [dataMovies, setDataMovies] = useState([])
